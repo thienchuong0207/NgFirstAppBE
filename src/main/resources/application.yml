@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: DEV
+
+# DEV Environment
+---
+spring:
+  profiles: DEV
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres123
+    initialization-mode: always # From Spring Boot 2, must turn on this property to execute schema.sql and data.sql files
+  jpa:
+    hibernate:
+      ddl-auto: none # Turn off automatic schema creation in order to execute schema.sql and data.sql files
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true # Disable Hibernate Exception: createBlob() is not implemented yet 
+server:
+  port: 8088
+    
