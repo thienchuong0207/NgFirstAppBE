@@ -21,7 +21,7 @@ public class StudentDTO {
 	private String name;
 	@JsonProperty(value = "gender", required = true)
 	private GenderEnum gender;
-	@JsonProperty(value = "photo", required = true)
+	@JsonProperty(value = "photo", required = false)
 	private byte[] photo;
 	@JsonProperty(value = "classId", required = true)
 	private String classId;

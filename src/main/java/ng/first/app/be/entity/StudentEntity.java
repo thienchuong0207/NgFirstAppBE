@@ -24,7 +24,7 @@ public class StudentEntity {
 	private String name;
 	@Column(name = "GENDER", nullable = false)
 	private Integer gender;
-	@Column(name = "PHOTO", nullable = false)
+	@Column(name = "PHOTO", nullable = true)
 	private byte[] photo;
 	@ManyToOne
 	@JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)

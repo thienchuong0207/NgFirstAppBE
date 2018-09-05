@@ -28,16 +28,15 @@ public class ClassService {
 	 * @return CLass DTO
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public ClassDTO getClassById(String classId) {
-		ClassDTO dto = null;
+	public ClassEntity getClassById(String classId) {
+		ClassEntity entity = null;
 		try {
 			Optional<ClassEntity> optionalClassEntity = classRepository.findById(classId);
-			ClassEntity entity = optionalClassEntity.isPresent() ? optionalClassEntity.get() : null;
-			dto = entity != null ? convertEntityToDTO(entity) : null;
+			entity = optionalClassEntity.isPresent() ? optionalClassEntity.get() : null;
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return dto;
+		return entity;
 	}
 	
 	/**
@@ -45,14 +44,15 @@ public class ClassService {
 	 * @param entity
 	 * @return
 	 */
-	private ClassDTO convertEntityToDTO(ClassEntity entity) {
-		ClassDTO dto = null;
-		if (entity != null) {
-			dto = new ClassDTO();
-			dto.setId(entity.getId());
-			dto.setName(entity.getName());
-			dto.setTeacherName(entity.getTeacherName());
+	@Transactional(propagation = Propagation.REQUIRED)
+	public ClassDTO convertEntityToDTO(ClassEntity classEntity) {
+		ClassDTO classDTO = null;
+		if (classEntity != null) {
+			classDTO = new ClassDTO();
+			classDTO.setId(classEntity.getId());
+			classDTO.setName(classEntity.getName());
+			classDTO.setTeacherName(classEntity.getTeacherName());
 		}
-		return dto;
+		return classDTO;
 	}
 }
