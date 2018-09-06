@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import ng.first.app.be.constant.StudentConstant;
 import ng.first.app.be.dto.StudentDTO;
@@ -35,8 +36,9 @@ public class StudentController {
 	 * Get All Students
 	 * @return
 	 */
+	@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	@RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getAllStudents(@RequestParam(value = "classId", required = true) String classId) {
+	public ResponseEntity<?> getStudentsByClassId(@RequestParam(value = "classId", required = true) String classId) {
 		List<StudentEntity> studentEntities = studentService.getStudentsByClassId(classId);
 		if (studentEntities == null) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,6 +58,7 @@ public class StudentController {
 	 * @param studentDTO
 	 * @return
 	 */
+	@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	@RequestMapping(path = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addNewStudent(@RequestBody StudentDTO studentDTO) {
 		StudentEntity studentEntity = studentService.convertDTOtoEntity(studentDTO);
@@ -76,6 +79,7 @@ public class StudentController {
 	 * @param studentId
 	 * @return
 	 */
+	@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	@RequestMapping(path = "/{studentId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteStudentById(@PathVariable(value = "studentId") String studentId) {
 		boolean isDeleted = studentService.deleteStudentById(studentId);

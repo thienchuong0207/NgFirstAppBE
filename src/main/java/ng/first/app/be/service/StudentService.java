@@ -68,7 +68,9 @@ public class StudentService {
 		
 		boolean isDeleted = false;
 		try {
-			studentRepository.deleteById(id);
+			if (studentRepository.findById(id).isPresent()) {
+				studentRepository.deleteById(id);
+			}
 			isDeleted = true;
 		} catch(Exception ex) {
 			ex.printStackTrace();
