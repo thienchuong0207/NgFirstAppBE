@@ -24,8 +24,8 @@ public class StudentEntity {
 	private String name;
 	@Column(name = "GENDER", nullable = false)
 	private Integer gender;
-	@Column(name = "PHOTO", nullable = true)
-	private byte[] photo;
+	@Column(name = "PHOTO_BASE_64", nullable = true)
+	private String photo;
 	@ManyToOne
 	@JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
 	private ClassEntity studentClass;
@@ -55,11 +55,11 @@ public class StudentEntity {
 		this.gender = gender;
 	}
 	
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return this.photo;
 	}
 	
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 	

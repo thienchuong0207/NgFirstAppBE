@@ -22,7 +22,7 @@ public class StudentDTO {
 	@JsonProperty(value = "gender", required = true)
 	private GenderEnum gender;
 	@JsonProperty(value = "photo", required = false)
-	private byte[] photo;
+	private String photo;
 	@JsonProperty(value = "classId", required = true)
 	private String classId;
 		
@@ -51,11 +51,11 @@ public class StudentDTO {
 		this.gender = gender;
 	}
 	
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return this.photo;
 	}
 	
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 	

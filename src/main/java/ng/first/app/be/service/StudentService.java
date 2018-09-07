@@ -92,7 +92,7 @@ public class StudentService {
 			studentEntity = new StudentEntity();
 			studentEntity.setId(studentDTO.getId());
 			studentEntity.setName(studentDTO.getName());
-			studentEntity.setPhoto(null);
+			studentEntity.setPhoto(studentDTO.getPhoto());
 			studentEntity.setGender(studentDTO.getGender().getValue());
 			studentEntity.setStudentClass(classEntity);
 		}

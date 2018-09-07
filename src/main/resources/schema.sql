@@ -8,6 +8,6 @@ CREATE TABLE IF NOT EXISTS students (
 	id CHAR(4) CONSTRAINT student_id PRIMARY KEY,
 	name VARCHAR(50) NOT NULL,
 	gender INTEGER NOT NULL,
-	photo bytea,
+	photo_base_64 text,
 	class_id CHAR(4) REFERENCES classes(id)
 );
