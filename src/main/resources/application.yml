@@ -10,7 +10,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: postgres123
+    password: admin
     initialization-mode: always # From Spring Boot 2, must turn on this property to execute schema.sql and data.sql files
   jpa:
     hibernate:

@@ -32,7 +32,6 @@ public class ClassController {
 	 * @param classId
 	 * @return
 	 */
-	@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	@RequestMapping(path = "/{classId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getClassById(@PathVariable(value = "classId") String classId) {
 		ClassEntity entity = classService.getClassById(classId);
