@@ -23,4 +23,3 @@ spring:
             non_contextual_creation: true # Disable Hibernate Exception: createBlob() is not implemented yet 
 server:
   port: 8088
-    
