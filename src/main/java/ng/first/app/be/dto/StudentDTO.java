@@ -12,8 +12,13 @@ import ng.first.app.be.enumeration.GenderEnum;
  *
  */
 @JsonInclude(value = Include.ALWAYS)
-public class StudentDTO {
-
+public class StudentDTO implements java.io.Serializable {
+	
+	/**
+	 * Serial Version UID 
+	 */
+	private static final long serialVersionUID = 2916179067971857841L;
+	
 	/* Properties */ 
 	@JsonProperty(value = "id", required = true)
 	private String id;

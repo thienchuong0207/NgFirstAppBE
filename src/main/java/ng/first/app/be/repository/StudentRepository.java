@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import ng.first.app.be.constant.StudentConstant;
 import ng.first.app.be.entity.StudentEntity;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 /**
  * Student Repository
  * @author giraffefamily
@@ -19,5 +22,5 @@ import ng.first.app.be.entity.StudentEntity;
 public interface StudentRepository extends JpaRepository<StudentEntity, String> {
 
 	@Query(name = "getStudentsByClassId", value = StudentConstant.GET_STUDENTS_BY_CLASS_ID)
-	public List<StudentEntity> getStudentsByClassId(@Param(value = "classId") String classId);
+	public Page<StudentEntity> getStudentsByClassId(@Param(value = "classId") String classId, Pageable pageable);
 }

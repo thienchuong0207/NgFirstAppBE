@@ -10,8 +10,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(value = Include.ALWAYS)
-public class ClassDTO {
-
+public class ClassDTO implements java.io.Serializable {
+	
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -9100546886924622354L;
+	
 	/* Properties */
 	@JsonProperty(value = "id", required = true)
 	private String id;

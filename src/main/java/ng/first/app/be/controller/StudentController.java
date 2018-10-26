@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ng.first.app.be.constant.StudentConstant;
 import ng.first.app.be.dto.StudentDTO;
+import ng.first.app.be.dto.StudentPageDTO;
 import ng.first.app.be.entity.StudentEntity;
 import ng.first.app.be.service.StudentService;
 
@@ -36,18 +39,24 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getStudentsByClassId(@RequestParam(value = "classId", required = true) String classId) {
-		List<StudentEntity> studentEntities = studentService.getStudentsByClassId(classId);
-		if (studentEntities == null) {
+	public ResponseEntity<?> getStudentsByClassId(@RequestParam(value = "classId", required = true) String classId, Pageable pageable) {
+		Page<StudentEntity> studentEntitiesPage = studentService.getStudentsByClassId(classId, pageable);
+		if (studentEntitiesPage == null) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		} else if (studentEntities.isEmpty()) {
+		} else if (studentEntitiesPage.getContent().isEmpty()) {
 			return new ResponseEntity<List<StudentDTO>>(new ArrayList<StudentDTO>(), HttpStatus.NO_CONTENT);
 		} else {
+			List<StudentEntity> studentEntities = studentEntitiesPage.getContent();
 			List<StudentDTO> studentDTOs = new ArrayList<StudentDTO>();
 			studentEntities.stream().forEach((studentEntity) -> {
 				studentDTOs.add(studentService.convertEntityToDTO(studentEntity));
 			});
-			return new ResponseEntity<List<StudentDTO>>(studentDTOs, HttpStatus.OK);
+			StudentPageDTO studentPageDTO = new StudentPageDTO();
+			studentPageDTO.setTotal(studentEntitiesPage.getTotalElements());
+			studentPageDTO.setTotalPages(studentEntitiesPage.getTotalPages());
+			studentPageDTO.setSize(studentEntitiesPage.getSize());
+			studentPageDTO.setStudents(studentDTOs);
+			return new ResponseEntity<StudentPageDTO>(studentPageDTO, HttpStatus.OK);
 		}
 	}
 	

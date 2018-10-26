@@ -1,8 +1,8 @@
 package ng.first.app.be.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +27,10 @@ public class StudentService {
 	 * @return
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<StudentEntity> getStudentsByClassId(String classId) {
-		
-		List<StudentEntity> students = null;
+	public Page<StudentEntity> getStudentsByClassId(String classId, Pageable pageable) {
+		Page<StudentEntity> students = null;
 		try {
-			students = studentRepository.getStudentsByClassId(classId);
+			students = studentRepository.getStudentsByClassId(classId, pageable);
 		} catch(Exception ex) {
 			students = null;
 			ex.printStackTrace();
@@ -46,7 +45,6 @@ public class StudentService {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public StudentEntity addNewStudent(StudentEntity studentEntity) {
-		
 		StudentEntity savedStudentEntity = null;
 		try {
 			if (studentEntity != null) {
@@ -65,7 +63,6 @@ public class StudentService {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean deleteStudentById(String id) {
-		
 		boolean isDeleted = false;
 		try {
 			if (studentRepository.findById(id).isPresent()) {
@@ -85,7 +82,6 @@ public class StudentService {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public StudentEntity convertDTOtoEntity(StudentDTO studentDTO) {
-		
 		StudentEntity studentEntity = null;
 		ClassEntity classEntity = classService.getClassById(studentDTO.getClassId());
 		if (classEntity != null) {
@@ -106,7 +102,6 @@ public class StudentService {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public StudentDTO convertEntityToDTO(StudentEntity studentEntity) {
-		
 		StudentDTO studentDTO = null;
 		if (studentEntity != null) {
 			studentDTO = new StudentDTO();
