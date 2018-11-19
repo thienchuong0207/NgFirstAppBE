@@ -7,7 +7,7 @@ spring:
 spring:
   profiles: DEV
   datasource:
-    url: jdbc:postgresql://192.168.56.101:5432/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: admin
@@ -22,4 +22,4 @@ spring:
           lob:
             non_contextual_creation: true # Disable Hibernate Exception: createBlob() is not implemented yet 
 server:
-  port: 8088
+  port: 8403

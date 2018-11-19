@@ -13,11 +13,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UserDTO {
 
 	/* Properties */
-	@JsonProperty(value = "id")
+	@JsonProperty(value = "id", required = false)
 	private String id;
-	@JsonProperty(value = "username")
+	@JsonProperty(value = "username", required = true)
 	private String username;
-	@JsonProperty(value = "password")
+	@JsonProperty(value = "password", required = true)
 	private String password;
 	
 	/* Getters and Setters */
