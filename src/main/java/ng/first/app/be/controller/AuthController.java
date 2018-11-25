@@ -1,18 +1,20 @@
 package ng.first.app.be.controller;
 
-import ng.first.app.be.dto.UserDTO;
-import ng.first.app.be.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.MediaType;
+
+import ng.first.app.be.constant.AuthConstant;
+import ng.first.app.be.dto.UserDTO;
+import ng.first.app.be.service.AuthService;
 
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = AuthConstant.ROOT_PATH)
 public class AuthController {
 
     @Autowired
